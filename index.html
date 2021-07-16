@@ -2,481 +2,550 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Shams Awais</title>
-        <link href="https://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
-        <!-- Responsive -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="This my Personal website and First website which I created contains Information about me" />
-        <meta name="keywords" content="Shams,Shams Awais,Awais,github,soundcloud,SoloLearn,Code,programming"/>
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIlHMuL9RLR4F955hE2-wHMQJTNvl7rs4haEU56X_2iHbU8Hlunw" />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIlHMuL9RLR4F955hE2-wHMQJTNvl7rs4haEU56X_2iHbU8Hlunw" />
-        
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!-- jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        </head>
+        <title>My Portfolio</title>
+        <style>
+        /* Custom properties/variables  */
+:root {
+  --main-white: #f0f0f0;
+  --main-red: #be3144;
+  --main-blue: #45567d;
+  --main-gray: #303841;
+}
+
+/* Base reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* box-sizing and font sizing */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+
+  /* Set font size for easy rem calculations
+   * default document font size = 16px, 1rem = 16px, 100% = 16px
+   * (100% / 16px) * 10 = 62.5%, 1rem = 10px, 62.5% = 10px
+  */
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+/* A few media query to set some font sizes at different screen sizes.
+ * This helps automate a bit of responsiveness.
+ * The trick is to use the rem unit for size values, margin and padding.
+ * Because rem is relative to the document font size
+ * when we scale up or down the font size on the document
+ * it will affect all properties using rem units for the values.
+*/
+
+/* I am using the em unit for breakpoints
+ * The calculation is the following
+ * screen size divided by browser base font size
+ * As an example: a breakpoint at 980px
+ * 980px / 16px = 61.25em
+*/
+
+/* 1200px / 16px = 75em */
+@media (max-width: 75em) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* 980px / 16px = 61.25em */
+@media (max-width: 61.25em) {
+  html {
+    font-size: 58%;
+  }
+}
+
+/* 460px / 16px = 28.75em */
+@media (max-width: 28.75em) {
+  html {
+    font-size: 55%;
+  }
+}
+
+/* Base styles */
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem; /* 18px */
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--main-white);
+}
+
+h1,
+h2 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+h1 {
+  font-size: 6rem;
+}
+
+h2 {
+  font-size: 4.2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--main-white);
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+/* nav */
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--main-red);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.nav-list {
+  display: flex;
+  margin-right: 2rem;
+}
+
+@media (max-width: 28.75em) {
+  .nav {
+    justify-content: center;
+  }
+
+  .nav-list {
+    margin: 0 1rem;
+  }
+}
+
+.nav-list a {
+  display: block;
+  font-size: 2.2rem;
+  padding: 2rem;
+}
+
+.nav-list a:hover {
+  background: var(--main-blue);
+}
+
+/* Welcome section */
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  background-image: linear-gradient(62deg, #3a3d40 0%, #181719 100%);
+}
+
+.welcome-section > p {
+  font-size: 3rem;
+  font-weight: 200;
+  font-style: italic;
+  color: var(--main-red);
+}
+
+/* Projects section */
+
+.projects-section {
+  text-align: center;
+  padding: 10rem 2rem;
+  background: var(--main-blue);
+}
+
+.projects-section-header {
+  max-width: 640px;
+  margin: 0 auto 6rem auto;
+  border-bottom: 0.2rem solid var(--main-white);
+}
+
+@media (max-width: 28.75em) {
+  .projects-section-header {
+    font-size: 4rem;
+  }
+}
+
+/* "Automagic" image grid using no media queries */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 4rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  margin-bottom: 6rem;
+}
+
+@media (max-width: 30.625em) {
+  .projects-section {
+    padding: 6rem 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project {
+  background: var(--main-gray);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+}
+
+.code {
+  color: var(--main-gray);
+  transition: color 0.3s ease-out;
+}
+
+.project:hover .code {
+  color: #ff7f50;
+}
+
+.project-image {
+  height: calc(100% - 6.8rem);
+  width: 100%;
+  object-fit: cover;
+}
+
+.project-title {
+  font-size: 2rem;
+  padding: 2rem 0.5rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-radius: 2px;
+}
+
+.btn-show-all {
+  font-size: 2rem;
+  background: var(--main-gray);
+  transition: background 0.3s ease-out;
+}
+
+.btn-show-all:hover {
+  background: var(--main-red);
+}
+
+.btn-show-all:hover > i {
+  transform: translateX(2px);
+}
+
+.btn-show-all > i {
+  margin-left: 10px;
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+}
+
+/* Contact section */
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 80vh;
+  padding: 0 2rem;
+  background: var(--main-gray);
+}
+
+.contact-section-header > h2 {
+  font-size: 6rem;
+}
+
+@media (max-width: 28.75em) {
+  .contact-section-header > h2 {
+    font-size: 4rem;
+  }
+}
+
+.contact-section-header > p {
+  font-style: italic;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 980px;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.contact-details {
+  font-size: 2.4rem;
+  text-shadow: 2px 2px 1px #1f1f1f;
+  transition: transform 0.3s ease-out;
+}
+
+.contact-details:hover {
+  transform: translateY(8px);
+}
+
+/* Footer */
+footer {
+  font-weight: 300;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2rem;
+  background: var(--main-gray);
+  border-top: 4px solid var(--main-red);
+}
+
+footer > p {
+  margin: 2rem;
+}
+
+footer i {
+  vertical-align: middle;
+}
+
+@media (max-width: 28.75em) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+        </style>
     </head>
-    <!--nav start-->
-    <nav></nav>
-    
+   
     <body>
-    <div class="navbar">
-    <span class="menu glyphicon glyphicon-menu-hamburger">
-    </span>
-    </div>
-    <!--Side Menu-->
-    <div class="side-menu">
-    <span class="close-side-menu glyphicon glyphicon-remove">
-    <a href="https://mohdshamsuddinawais123.000webhostapp.com/registration/login.php"><i>Login</i></a><br>
-    <a href="https://mohdshamsuddinawais123.000webhostapp.com/registration/register.php"><i>SignUp</i></a></span>
-    </div>
-        <!-- header start -->
-          <h1><i><b>Welcome to My Website</b></i></h1>
-           <div id="header" class="section">
-            <img alt="" class="img-circle" src="https://www.sololearn.com/avatars/70de29ce-3748-4e4b-b679-b155d403fe72.jpg">
-            <p>Shams Awais</p>
-        </div>
-        <!-- header end -->
-        
-        <!-- About Me section start -->
-        <div class="section">
-            <h1><span><b></b>About Me</span></h1>
-            <p>
-                Hey! I'm <strong><i>Shams Awais!</i></strong> I'm not very good at it, but coding has changed my world. It's not just about apps. Learning to code gave me <b><i>problem-solving skills</i></b> and a way to communicate with others on a technical level. I can learn by trying and if I keep trying, I know I will make something amazing! And I learn everything at <strong><i>SoloLearn,Online,College</i></strong> where they build your self-esteem and keep you motivated. Join me in this rewarding journey. You'll have fun, get help, and learn along the way!
-            </p>
-          <i><p class="quote">"Give a man a program, frustrate him for a day.
-Teach a man to program, frustrate him for a lifetime."</p></i>
-            <p><b>Shams Awais, 2018</b></p>
-        </div>
-        <!-- About Me section end -->
-        
-        <!-- My Schedule section start -->
-        <div class="section">
-            <h1><span><b>My Schedule</b></span></h1>
-            <table>
-                <tr>
-                    <th>Day</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                </tr>
-                <tr>
-                    <td>8-8:30</td>
-                    <td class="selected">Learn</td>
-                    <td
-class="selected">Learn</td>
-                    <td
-class="selected">Learn</td>
-                    <td
-class="selected">Learn</td>
-                    <td
-class="selected">Learn</td>
-                </tr>
-                <tr>
-                    <td>9-10</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>1-1:30</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>3:45-5</td>
-                    <td
-class="selected">Play</td>
-                    <td
-class="selected">Code</td>
-                    <td
-class="selected">Play</td>
-                    <td class="selected">Code</td>
-                    <td
-class="selected">Play</td>
-                </tr>
-                <tr>
-                    <td>6-6:15</td>
-                    <td
-class="selected">Code</td>
-                    <td
-class="selected">Chat</td>
-                    <td
-class="selected">Code</td>
-                    <td
-class="selected">Chat</td>
-                    <td class="selected">Code</td>
-                </tr>
-            </table>
-        </div>
-        <!-- My Schedule section end -->
-        
-        
-        <!-- My Skills section start -->
-        <div class="section">
-            <h1><span><b>My Skills</b></span></h1>
-            <ul>
-                <li><a href="https://www.sololearn.com/Courses/HTML">HTML <br /></a>
-                    <progress min="0" max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/Java">Java <br /></a>
-                    <progress min="0" max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/Python">Python <br /></a>
-                    <progress min="0" max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/CSS">CSS <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/JavaScript">JavaScript <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/SQL">SQL <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/PHP">PHP <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/jQuery">jQuery <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/Swift">Swift <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/Ruby">Ruby <br /></a>
-                    <progress min="0"  
-max="100" value="100"></progress>                
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/C++">C++ <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>              
-                </li>
-                <li><a href="https://www.sololearn.com/Courses/C#">C# <br /></a>
-                    <progress min="0"
-max="100" value="100"></progress>               
-                </li>                               
-            </ul>
-        </div>
-        <!-- My Skills section end -->
-        
-        
-         <!-- Media section start -->
-        <div class="section">
-            <h1><span>My 'Blog' posts</span></h1>
-            <p>Check out the codes below! As I'm not allowed to have an actual blog, these weird codes are the next best!</p>
-            <ul>
-            <li>Relatable moments</li>
-            <li>Pet peeves</li>
-            <li>SMS-The Quest to save everything</li>
-            <ol>
-                <li>Intro</li>
-                <li>My Codes</li>
-                <li>My Interests</li>
-                <li><a href="https://drive.google.com/folderview?id=1g24kdAQCkVryeyc7SrNCi3XPmwORe5M0">My Apk Collection</a></li>
-                <li>C1 P2 - WIP!</li>
-                <li><a href="https://mohdshamsuddinawais123.000webhostapp.com/ColorSwitch.html" >ColorSwitch.html</a>
-                </li>
-                
-            <li><a href="https://mohdshamsuddinawais123.000webhostapp.com/RockPaperScissors.html" >RockPaperScissors.html</a></li>
-            <li><a href="https://mohdshamsuddinawais123.000webhostapp.com/Calculator[Game].html">Calculator [Game].html</a></li>
-            <li><a href="https://mohdshamsuddinawais123.000webhostapp.com/Chess.html" >Chess.html</a></li>
-            </ol>
-            </ul>
-        </div>
-        <!-- Media section end -->
-        
-        
-        <!-- Contacts section start -->
-        <div class="section" id="contacts">
-       <span><b>Follow Me</b></span>
-       <p>
-       
-       
-       </p>
-           <a href="https://www.sololearn.com/" target="_blank">
-               <img alt="SoloLearn" src="https://www.sololearn.com/Uploads/icons/sololearn.png" /><a href="https://www.sololearn.com/Profile/8434788"class="sololearn-follow-button" data-show-count="false"><b>follow @shamsawais</b></a>
-               
-               <p>
-               
-               </p>
-           </a>
-           <a href="#">
-               <img alt="Facebook" src="https://www.sololearn.com/Uploads/icons/facebook.png"/><a href="https://m.facebook.com/shams.awais.3?ref=bookmarks"class="facebook-follow-button" data-show-count="fasle"><b>Follow @ShamsAwais</b><a/>
-           </a>
-           
-           <p>
-               
-               
-           </p>
-           <a>
-               <img alt="Instagram" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSotOctPSKm1A-h6bTMuPCf60gVWnTI7qJzx6mSe88lnV-Cm-G6kxDvyK4" /><a href="https://www.instagram.com/shams.awais/" class="instagram-follow-button" data-show-count="false"><b>Follow @ShamsAwais</b></a>
-           </a> 
-           <p>
-               
-               
-           </p>
-           
-            <a>
- <img alt="Twitter" src="https://www.sololearn.com/Uploads/icons/twitter.png" /><a href="https://twitter.com/shamsawais123?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false"><b>Follow @shamsawais123</b></a>
- <p>
- 
- 
- <img alt="Google+" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTNXiqPYA061LEmhhk842xsKlPuGzzb3NGJzqJmyQsphCd6SYhK" /><a href="https://plus.google.com/105170682911717849076" class="google+-follow-button" data-show-count="false">Follow @ShamsAwais</a>
- </a> 
-</a> 
-  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
-  <!-- Histats.com  START  (aync)-->
-  <script type="text/javascript">var _Hasync= _Hasync|| [];
-  _Hasync.push(['Histats.start', '1,4123285,4,15,170,40,00010000']);
-  _Hasync.push(['Histats.fasi', '1']);
-  _Hasync.push(['Histats.track_hits', '']);
-  (function() {
-  var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-  hs.src = ('//s10.histats.com/js15_as.js');
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-  })();</script>
-  <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4123285&101" alt="web stats" border="0"></a></noscript>
-  <!-- Histats.com  END  -->
-       
-   </div>
-        <div class="copyright"> &copy; 2018 A random code in the corner of SoloLearn. Not original. Based off the website you create in the HTML course.
-        <style type="text/css">
-        html {
-        margin: 10;
-        padding: 10;
-        }
-        body {
-        font-family: 'lobster', cursive;
-        font-size: 13pt;
-        background-color:orange;
-        color:Yellow;
-        padding: 10px;
-        margin: 0;
-         background: #C0DEFF;
-        }
-        
-        .menu{
-        position: relative;
-        margin-top: 12px;
-        margin-left: 10px;
-        font-size: 40px;
-        color: #000300;
-        user-select: none;
-        }
-        .side-menu{
-        position: fixed;
-        height: 100%;
-        width: 0;
-        background-color: darksalmon;
-        display: none;
-        color: white;
-        box-shadow: 0 2px 5px dimgray;
-        }
-        .close-side-menu{
-        float: right;
-        margin-right: 20px;
-        margin-top: 15px;
-        font-size: 25px;
-        text-shadow: 1px 1px 1px gray;
-        }
-        .close-side-menu:hover{
-        color: indianred;
-        }
-        a{
-        text-decoration:none;
-        }
-        h1 {
-        animation: type 1.5s steps(17);
-    overflow: hidden;
-    white-space: nowrap;
-    font-family: 'lobster',cursive;
-    width: 17ch;
+   <link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+  integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+  crossorigin="anonymous"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Poppins:200i,300,400&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Raleway:700&display=swap"
+  rel="stylesheet"
+/>
+<!-- START NAV -->
+
+<nav id="navbar" class="nav">
+  <ul class="nav-list">
+    <li>
+      <a href="#welcome-section">About</a>
+    </li>
+    <li>
+      <a href="#projects">Work</a>
+    </li>
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- END NAV -->
+
+<!-- START WELCOME SECTION -->
+
+<section id="welcome-section" class="welcome-section">
+  <h1>Hey I am Shams Awais</h1>
+  <p>a web developer/Coder</p>
+</section>
+
+<!-- END WELCOME SECTION -->
+
+<!-- START PROJECTS SECTION -->
+
+<section id="projects" class="projects-section">
+  <h2 class="projects-section-header">These are some of my projects</h2>
+
+  <div class="projects-grid">
+    <a
+      href="https://codepen.io/shamsawais/full/xxdqRvv"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/ShamsAwais/images/tributePage.PNG"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Tribute Page
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+    <a
+      href="https://github.com/ShamsAwais/Subjective-Answer-Evaluation"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/Subjective-Answer-Evaluation/main/src/static/images/home.png"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Subjective Answer Evaluation using ML
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+    <a
+      href="https://github.com/ShamsAwais/Groupchat"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/ShamsAwais/images/groupchat.png"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Group Chat
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+    <a
+      href="https://shamsawais.github.io/Calculator/"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/ShamsAwais/images/Calculator.PNG"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Simple Calculator
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+    <a
+      href="https://codepen.io/shamsawais/project/full/DvpbLR"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/ShamsAwais/images/DigitalClock.PNG"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Digital Clock
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+    <a
+      href="https://codepen.io/shamsawais/full/QWvvwaL"
+      target="_blank"
+      class="project project-tile"
+    >
+      <img
+        class="project-image"
+        src="https://raw.githubusercontent.com/ShamsAwais/ShamsAwais/images/TicTacToe.PNG"
+        alt="project"
+      />
+      <p class="project-title">
+        <span class="code">&lt;</span>
+        Tic Tac Toe Game
+        <span class="code">&#47;&gt;</span>
+      </p>
+    </a>
+  </div>
+
+  <a
+    href="https://codepen.io/shamsawais/"
+    class="btn btn-show-all"
+    target="_blank"
+    >Show all<i class="fas fa-chevron-right"></i
+  ></a>
+</section>
+
+<!-- END PROJECTS SECTION -->
+
+<!-- START CONTACT SECTION -->
+
+<section id="contact" class="contact-section">
+  <div class="contact-section-header">
+    <h2>Let's work together...</h2>
+    <p>How do you take your coffee?</p>
+  </div>
+  <div class="contact-links">
+    <a
+      href="https://www.facebook.com/shams.awais.3"
+      target="_blank"
+      class="btn contact-details"
+      ><i class="fab fa-facebook-square"></i> Facebook</a
+    >
+    <a
+      id="profile-link"
+      href="https://github.com/ShamsAwais"
+      target="_blank"
+      class="btn contact-details"
+      ><i class="fab fa-github"></i> GitHub</a
+    >
+    <a
+      href="https://twitter.com/freecodecamp"
+      target="_blank"
+      class="btn contact-details"
+      ><i class="fab fa-twitter"></i> Twitter</a
+    >
+    <a href="mailto:shamsawais786@gmail.com" class="btn contact-details"
+      ><i class="fas fa-at"></i> Send a mail</a
+    >
+    <a href="tel:9959565394" class="btn contact-details"
+      ><i class="fas fa-mobile-alt"></i> Call me</a
+    >
+  </div>
+</section>
+
+<!-- END CONTACT SECTION -->
+
+<!-- START FOOTER SECTION -->
+
+<footer>
+  <p>
+    **This is just a portfolio. All the projects and contact details given
+    are real.
+  </p>
+  <p>
+    &copy; Created by Shams Awais
     
-        } 
-        
+  </p>
+</footer>
 
+<!-- END FOOTER SECTION -->
 
-
-        h1 span {
-        border: 4px dashed #20bcd5;
-        padding: 10px;
-        }
-        p {
-        padding: 0;
-        margin: 0;
-        }
-        .img-circle {
-        border: 3px solid white;
-        border-radius: 50%;
-        }
-        .section {
-        background-color: #27D11E;
-        padding: 15px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: 4px dashed #0000ff;
-        }
-        #header {
-        background:linear-gradient(45deg,#e80 0%,#b2c 100%) no-repeat 
-        }
-        #header img {
-        display: block;
-        width: 80px;
-        height: 80px;
-        margin: auto;
-        }
-        #header p {
-        font-size: 25pt;
-        color: #3b464c;
-        padding-top: 5px;
-        margin: 0;
-        font-weight: bold;
-        text-align: center;
-        }
-        .quote {
-        font-size: 12pt;
-        text-align: right;
-        margin-top: 10px; 
-        }
-        table {
-        width: 100%;
-        }
-        table, th, td {
-        border: 2px solid #cecece;
-        border-collapse: collapse;
-        text-align: center;
-        table-layout: fixed;
-        }
-        .selected {
-        background-color: #f36f48;
-        font-weight: bold;
-        color: white;
-        }
-        li {
-        margin-bottom: 15px;
-        font-weight: bold;
-        }
-        progress {
-        width: 70%;
-        height: 20px;
-        color: #00ace0;
-        background: #0face0;
-        }
-        progress::-webkit-progress-bar {
-        background: #efefef;
-        }
-        progress::-webkit-progress-value {
-        background: #3fb6b2;
-        } 
-        progress::-moz-progress-bar {
-        color: #3fb6b2;
-        background: #efefef;
-        }
-        iframe, audio {
-        display: block;
-        margin: 0 auto;
-        border: 3px solid #3fb6b2;
-        }
-        hr {
-        border: 0;
-        height: 1px;
-        background: #f36f48;
-        }
-        form {
-        text-align: center;
-        margin-top: 0;
-        }
-        .submit {
-        background-color: #3fb6b2;
-        padding: 12px 45px;
-        border-radius: 5px;
-        cursor: pointer;
-        color: #ffffff;
-        border: none;
-        outline: none;
-        margin: 0;
-        font-weight: bold;
-        }
-        .submit:hover {
-        background-color: #43a09d;
-        }
-        textarea {
-        height: 100px;
-        }
-        input, textarea {
-        margin-bottom: 10px;
-        font-size: 11pt;
-        padding: 15px 10px 10px;
-        border: 1px solid #cecece;
-        background-color: #efefef;
-        color: #787575;
-        border-radius: 5px;
-        width: 70%;
-        outline: none;
-        }
-        .face {
-        transform: scale(0.4);
-        margin: 0 auto;
-        display: block;
-        margin-top: -35px;
-        margin-bottom: -25px;
-        }
-        #contacts img {
-        height: 50px;
-        width: 50px;
-        margin-left: 7px;
-        margin-right: 7px;
-        }
-        #contacts a {
-        text-decoration: none;
-        }
-        #contacts img:hover {
-        opacity: 0.8;
-        }
-        #contacts {
-        text-align: center;
-        }
-        .copyright {
-        font-size: 8pt;
-        text-align: center;
-        padding-bottom: 10px;
-        color: grey;
-        }</style>
-        <script type="text/javascript">
-        alert ("WARNING: This website contains awesomeness. Not suitable for people who hate cool websites.")
-        $(function(){
-        //open side menu
-        $('.menu').on('click', function(){
-        $('.side-menu').show();
-        $('.side-menu').animate({width: '170px'}, 500);
-        });
-        //close side menu
-        $('.close-side-menu').on('click', function(){
-        $('.side-menu').animate({width: '0px'}, 500);
-        $('.side-menu').show();
-        });
-        });
-        
-        </script>
-    <div style='text-align: right;position: fixed;z-index:9999999;bottom: 0; width: 100%;cursor: pointer;line-height: 0;display:block !important;'><a title="Hosted on free web hosting 000webhost.com. Host your own website for FREE." target="_blank" href="https://www.000webhost.com/?utm_source=000webhostapp&amp;utm_campaign=000_logo&amp;utm_medium=website_mohdshamsuddinawais123&amp;utm_content=footer_img"><img src="https://cdn.rawgit.com/000webhost/logo/e9bd13f7/footer-powered-by-000webhost-white2.png"  alt="www.000webhost.com"></a></div></body>
+</body>
 </html>
